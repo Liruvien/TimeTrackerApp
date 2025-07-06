@@ -12,6 +12,14 @@ function apiListTasks() {
   });
 }
 
+function apiListOperationsForTask(taskId) {
+  return fetch(apihost + "/api/tasks/" + taskId + "/operations", { headers: { Authorization: apikey } }).then(
+    function (resp) {
+      return resp.json();
+    },
+  );
+}
+
 function renderTask(taskId, title, description, status) {
   const section = document.createElement("section");
   section.className = "card mt-5 shadow-sm";
