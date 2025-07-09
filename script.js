@@ -12,6 +12,19 @@ function apiListTasks() {
   });
 }
 
+function apiCreateTask(title, description) {
+  return fetch(apihost + "/api/tasks", {
+    headers: { Authorization: apikey, "Content-Type": "application/json" },
+    body: JSON.stringify({ title: title, description: description, status: "open" }),
+    method: "POST",
+  }).then(function (resp) {
+    if (!resp.ok) {
+      alert("Wystąpił błąd! Otwórz devtools i zakładkę Sieć/Network, i poszukaj przyczyny");
+    }
+    return resp.json();
+  });
+}
+
 function apiListOperationsForTask(taskId) {
   return fetch(apihost + "/api/tasks/" + taskId + "/operations", { headers: { Authorization: apikey } }).then(
     function (resp) {
