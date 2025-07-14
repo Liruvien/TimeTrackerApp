@@ -24,6 +24,20 @@ function apiCreateTask(title, description) {
     return resp.json();
   });
 }
+}
+
+function apiUpdateTask(taskId, title, description, status) {
+  return fetch(apihost + "/api/tasks/" + taskId, {
+    headers: { Authorization: apikey, "Content-Type": "application/json" },
+    body: JSON.stringify({ title: title, description: description, status: status }),
+    method: "PUT",
+  }).then(function (resp) {
+    if (!resp.ok) {
+      alert("Wystąpił błąd! Otwórz devtools i zakładkę Sieć/Network, i poszukaj przyczyny");
+    }
+    return resp.json();
+  });
+}
 
 function apiListOperationsForTask(taskId) {
   return fetch(apihost + "/api/tasks/" + taskId + "/operations", { headers: { Authorization: apikey } }).then(
