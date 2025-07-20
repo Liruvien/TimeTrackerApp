@@ -39,6 +39,18 @@ function apiUpdateTask(taskId, title, description, status) {
   });
 }
 
+function apiDeleteTask(taskId) {
+  return fetch(apihost + "/api/tasks/" + taskId, {
+    headers: { Authorization: apikey },
+    method: "DELETE",
+  }).then(function (resp) {
+    if (!resp.ok) {
+      alert("Wystąpił błąd! Otwórz devtools i zakładkę Sieć/Network, i poszukaj przyczyny");
+    }
+    return resp.json();
+  });
+}
+
 function apiListOperationsForTask(taskId) {
   return fetch(apihost + "/api/tasks/" + taskId + "/operations", { headers: { Authorization: apikey } }).then(
     function (resp) {
